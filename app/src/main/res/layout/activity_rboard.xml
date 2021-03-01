@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RboardActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="게시글 상세 페이지"
+        android:textSize="30sp" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="355dp"
+        android:layout_margin="8dp"
+        android:stretchColumns="*">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_inside"
+                android:gravity="center"
+                android:text="글번호"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_inside"
+                android:gravity="center"
+                android:text="작성자"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="영석"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_inside"
+                android:gravity="center"
+                android:text="조회수"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bhit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1111"
+                android:textSize="20sp" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:background="@color/black" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_inside"
+                android:gravity="center"
+                android:text="등록일자"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="5"
+                android:gravity="center"
+                android:text="2021-02-25"
+                android:textSize="20sp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_inside"
+                android:gravity="center"
+                android:text="제목"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/binsertdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="5"
+                android:gravity="center"
+                android:text="안드로이드 어려워"
+                android:textSize="20sp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_inside"
+                android:gravity="center"
+                android:text="내용"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="5"
+                android:text="졸려 ㅠㅠ"
+                android:textSize="20sp" />
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
