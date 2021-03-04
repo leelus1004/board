@@ -1,20 +1,21 @@
 package g.g.d.board;
 
-import android.graphics.drawable.Drawable;
-
-public class BoardItemVO {
+// 게시판 목록 리스트 뷰 아이템
+public class ListViewItem {
 
     private String bfile;
     private String bsubject;
     private String bname;
+    private String binsertdate;
 
-    public BoardItemVO() {
+    public ListViewItem() {
     }
 
-    public BoardItemVO(String bfile, String bsubject, String bname) {
+    public ListViewItem(String bfile, String bsubject, String bname ,String binsertdate) {
         this.bfile = bfile;
         this.bsubject = bsubject;
         this.bname = bname;
+        this.binsertdate = binsertdate;
     }
 
     public String getBfile() {
@@ -40,5 +41,9 @@ public class BoardItemVO {
     public void setBname(String bname) {
         this.bname = bname;
     }
+
+    public String getBinsertdate() { return binsertdate; }
+
+    public void setBinsertdate(String binsertdate) { this.binsertdate = binsertdate; }
 
 }

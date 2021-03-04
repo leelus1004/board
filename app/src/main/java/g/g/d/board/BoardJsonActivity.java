@@ -10,13 +10,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class JsonActivity extends AsyncTask<String, Void, String> {
+public class BoardJsonActivity extends AsyncTask<String, Void, String> {
 
     String sendMsg, receiveMsg;
 
     // jsp 연결
     protected String doInBackground(String... strings){
-        System.out.println("RegisterActivity doInBackground >>>>>>>>>>>>>>>>>>>");
+        System.out.println("BoardJsonActivity doInBackground >>>>>>>>>>>>>>>>>>>");
         try {
             String str;
             URL url = new URL("http://221.149.207.103:8080/board/boardList2.ggd");

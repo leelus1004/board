@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/rdnum"
+            android:id="@+id/rbname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
@@ -26,7 +26,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/rbinsertdate"
+            android:id="@+id/rbdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"

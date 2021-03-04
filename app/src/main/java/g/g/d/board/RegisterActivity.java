@@ -28,7 +28,7 @@ public class RegisterActivity extends AsyncTask<String, Void, String> {
             OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 
             // insert 한 데이터
-            sendMsg = "bsubject=" + strings[0] + "&bname=" + strings[1] + "&bcontent=" + strings[2];
+            sendMsg = "bsubject=" + strings[0] + "&bname=" + strings[1] + "&bcontent=" + strings[2] + "&bpw=" + strings[3] + "&bfile=" + strings[4];
             osw.write(sendMsg);
             osw.flush();
 
