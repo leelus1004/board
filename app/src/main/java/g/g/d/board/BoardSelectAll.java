@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class BoardSelectAll extends AppCompatActivity {
@@ -35,46 +35,19 @@ public class BoardSelectAll extends AppCompatActivity {
         getSupportActionBar().setIcon(R.mipmap.ic_gogoda_foreground);
 
         // Adapter 생성
-        adapter = new ListViewAdapter();
-
-        // 리스트 뷰 참조 및 Adapter 담기
-        listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adapter);
-
-        BoardJsonActivity task = new BoardJsonActivity();
-        // execute 명령어를 통해 AsyncTask 실행
-        // 클래스.execute(인자).get() 을 하면 결과가 자동으로 들어간다.
+        BoardJsonTask task = new BoardJsonTask();
         try {
-            String result = "";
-            result = task.execute().get();
-            System.out.println("result >>> : " + result);
-            JSONObject json = new JSONObject(result.toString());
-            System.out.println(json);
-            // System.out.println(json.getJSONArray("board"));
-            // System.out.println(json.getJSONArray("board").getJSONObject(0));
-            // System.out.println(json.getJSONArray("board").getJSONObject(0));
-            // System.out.println(json.getJSONArray("board").getJSONObject(0).getString("bname"));
-            JSONArray jArray = json.getJSONArray("board");
-
-            for(int i = 0; i< jArray.length(); i++){
-                JSONObject obj = jArray.getJSONObject(i);
-                String bname = obj.getString("bname");
-                String bsubject = obj.getString("bsubject");
-                String bfile = obj.getString("bfile");
-                String binsertdate = obj.getString("binsertdate");
-                String bupdatedate = obj.getString("bupdatedate");
-                System.out.println("bfile >>>>>>>>>>>>>>>>>>> : " + bfile);
-                adapter.addItem(bfile, bsubject, bname, binsertdate);
-            }
-
+            ArrayList<ListViewItem> result = task.execute().get();
+            adapter = new ListViewAdapter(result);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        //adapter.addItem();
+        // 리스트 뷰 참조 및 Adapter 담기
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
         // 이벤트 처리 : onCreate() 함수 내에서 클릭 이벤트 처리
         // 위에서 생성한 listView에 클릭 이벤트 핸들러 정의
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,6 +66,7 @@ public class BoardSelectAll extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        adapter.notifyDataSetChanged();
 
         // 검색(EditText) 변경 이벤트 처리
         editSearch = (EditText)findViewById(R.id.editSerach);

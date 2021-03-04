@@ -2,6 +2,10 @@ package g.g.d.board;
 
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,13 +13,15 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
-public class BoardJsonActivity extends AsyncTask<String, Void, String> {
+public class BoardJsonTask extends AsyncTask<String, Void, ArrayList<ListViewItem>> {
 
     String sendMsg, receiveMsg;
 
     // jsp 연결
-    protected String doInBackground(String... strings){
+    protected ArrayList<ListViewItem> doInBackground(String... strings){
         System.out.println("BoardJsonActivity doInBackground >>>>>>>>>>>>>>>>>>>");
         try {
             String str;
@@ -37,7 +43,7 @@ public class BoardJsonActivity extends AsyncTask<String, Void, String> {
             osw.flush();
 
             if (conn.getResponseCode() == conn.HTTP_OK){
-                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(tmp);
                 StringBuffer buffer = new StringBuffer();
 
@@ -55,6 +61,20 @@ public class BoardJsonActivity extends AsyncTask<String, Void, String> {
         } catch (IOException e){
             e.printStackTrace();
         }
-        return receiveMsg;
+
+        ArrayList<ListViewItem> listViewItems = new ArrayList<ListViewItem>();
+        try {
+            System.out.println("result >>> : " + receiveMsg);
+            JSONObject json = new JSONObject(receiveMsg);
+            System.out.println(json);
+            JSONArray jArray = json.getJSONArray("board");
+            for(int i = 0; i< jArray.length(); i++){
+                JSONObject obj = jArray.getJSONObject(i);
+                listViewItems.add(new ListViewItem(obj));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return listViewItems;
     }
 }

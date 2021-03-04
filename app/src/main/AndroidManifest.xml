@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Board"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RboardActivity"></activity>
+        <activity android:name=".RboardActivity"/>
         <activity android:name=".BoardWrite" />
         <activity android:name=".BoardSelectAll" />
         <activity android:name=".MainActivity">
@@ -27,8 +27,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
         </activity>
     </application>
 

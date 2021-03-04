@@ -2,16 +2,12 @@ package g.g.d.board;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,12 +16,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import g.g.d.board.model.Board;
 
 // 게시판 글 작성 화면
 public class BoardWrite extends AppCompatActivity {
@@ -35,7 +27,6 @@ public class BoardWrite extends AppCompatActivity {
     private EditText bsubject, bname, bcontent, bpw; // 컬럼 목록
     private final int GET_GALLERY_IMAGE = 200;       // 갤러리 이미지 가져오기
     private ImageView bfile;  // 이미지 뷰 클릭시 사진 불러오기
-    File tempSelectFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +65,10 @@ public class BoardWrite extends AppCompatActivity {
                     String name = bname.getText().toString();
                     String content = bcontent.getText().toString();
                     String pw = bpw.getText().toString();
-                    // String file = bfile.getDrawable().toString();
+                    Drawable drawable = bfile.getDrawable();
+                    Bitmap file = ((BitmapDrawable)drawable).getBitmap();
+                    BoardWriteItem writeItem = new BoardWriteItem(subject, name, content, pw, file);
+
 
                     System.out.println("subject >>> : " + subject);
                     System.out.println("name >>> : " + name);
@@ -82,10 +76,10 @@ public class BoardWrite extends AppCompatActivity {
                     System.out.println("pw >>> : " + pw);
                     // System.out.println("file >>> : " + file);
 
-                    RegisterActivity task = new RegisterActivity();
+                    RegisterTask task = new RegisterTask();
                     // execute 명령어를 통해 AsyncTastk 실행
                     // 클래스.execute(인자).get() 을 하면 결과가 자동으로 들어간다.
-                    result = task.execute(subject, name, content, pw).get();
+                    result = task.execute(writeItem).get();
                     System.out.println("result >>> : " + result);
                 }catch (Exception e){
                     Log.i("DBTEST", "..........ERROR.........");

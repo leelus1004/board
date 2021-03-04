@@ -12,19 +12,29 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter implements Filterable {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList (원본 데이터 리스트)
-    private ArrayList<ListViewItem> listViewItemList =new ArrayList<ListViewItem>();
+    private ArrayList<ListViewItem> listViewItemList;
 
     // 필터링 된 결과 데이터를 저장하기 위한 ArrayList : 최초에는 전체 리스트 보유
-    private ArrayList<ListViewItem> filteredItemList = listViewItemList;
+    private ArrayList<ListViewItem> filteredItemList;
 
     Filter listFilter;
 
     // ListViewAdapter의 생성자
-    public ListViewAdapter() {}
+    public ListViewAdapter() {
+        this.listViewItemList = new ArrayList<ListViewItem>();
+        filteredItemList = listViewItemList;
+    }
+    public ListViewAdapter(ArrayList<ListViewItem> listViewItemList) {
+        this.listViewItemList = listViewItemList;
+        filteredItemList = listViewItemList;
+    }
 
     // Adapter에 사용되는 데이터의 개수를 리턴
     @Override
@@ -55,9 +65,9 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
 
 
         // 아이템 내 각 위젯에 데이터 반영
-        Picasso.get()
-                .load("http://221.149.207.103:8080/uploadStorage/" + listViewItem.getBfile())
-                .into(bfile);
+
+
+        bfile.setImageBitmap(listViewItem.getFile());
         bsubject.setText(listViewItem.getBsubject());
         bname.setText(listViewItem.getBname());
         binsertdate.setText(listViewItem.getBinsertdate());
@@ -78,14 +88,12 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
     }
 
     // 아이템 데이터 추가를 위한 함수
+    public void addItem(JSONObject object) {
+        ListViewItem item = new ListViewItem(object);
+        listViewItemList.add(item);
+    }
     public void addItem(String bfile, String bsubject, String bname, String binsertdate) {
-        ListViewItem item = new ListViewItem();
-
-        item.setBfile(bfile);
-        item.setBsubject(bsubject);
-        item.setBname(bname);
-        item.setBinsertdate(binsertdate);
-
+        ListViewItem item = new ListViewItem(bfile, bsubject, bname, binsertdate);
         listViewItemList.add(item);
     }
 
